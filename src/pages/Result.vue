@@ -1,11 +1,15 @@
 <script>
+import Carousel from '@/components/Carousel.vue'
 export default {
   name: '_Result',
+  components: {
+    Carousel: Carousel,
+  },
 }
 </script>
 
 <template>
-  <div></div>
+  <Carousel/>
 </template>
 
 <style scoped></style>

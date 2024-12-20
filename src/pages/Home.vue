@@ -5,7 +5,10 @@ export default {
 </script>
 
 <template>
-  <div></div>
+  <div class="container">
+    <input type="text">
+    <button class="btn btn-dark col-4">Search</button>
+  </div>
 </template>
 
 <style scoped></style>
