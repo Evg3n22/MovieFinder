@@ -4,10 +4,25 @@ export default {
 }
 </script>
 
+<script setup>
+import { useFilmsStore } from '@/store.js'
+
+const store = useFilmsStore()
+
+store.film_search()
+</script>
+
 <template>
   <div class="container">
-    <input type="text">
-    <button class="btn btn-dark col-4">Search</button>
+    <input
+      type="text"
+      placeholder="Enter the film name"
+      @keyup.enter="store.film_search(store.filmName)"
+      v-model="store.filmName"
+    />
+    <router-link to="/result">
+      <button class="btn btn-dark col-4" @click="store.film_search(store.filmName)">Search</button>
+    </router-link>
   </div>
 </template>
 
