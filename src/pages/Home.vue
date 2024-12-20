@@ -6,7 +6,7 @@ export default {
 
 <script setup>
 import { useFilmsStore } from '@/store.js'
-
+import Modal from '@/components/Modal.vue'
 const store = useFilmsStore()
 
 store.film_search()
@@ -21,9 +21,13 @@ store.film_search()
       v-model="store.filmName"
     />
     <router-link to="/result">
-      <button class="btn btn-dark col-4" @click="store.film_search(store.filmName)">Search</button>
+      <button class="btn btn-dark " @click="store.film_search(store.filmName)">Search</button>
     </router-link>
+
+    <Modal/>
   </div>
+
+
+
 </template>
 
-<style scoped></style>

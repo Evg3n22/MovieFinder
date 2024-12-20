@@ -38,18 +38,11 @@
 
 <script setup>
 import { useFilmsStore } from '@/store.js'
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import Carousel from 'primevue/carousel'
-
-// import { ProductService } from '@/service/ProductService'
 
 const store = useFilmsStore()
 
-onMounted(() => {
-  // ProductService.getProductsSmall().then((data) => (products.value = data.slice(0, 9)))
-})
-
-// const products = ref()
 const responsiveOptions = ref([
   {
     breakpoint: '1400px',

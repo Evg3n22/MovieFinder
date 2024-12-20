@@ -12,12 +12,6 @@
   </div>
 </template>
 
-<script setup>
-// import { useFilmsStore } from '@/store.js'
-// const store = useFilmsStore()
-
-</script>
-
 <script>
 export default {
   name: '_Info',

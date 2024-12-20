@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from '@/router.js'
 
 import PrimeVue from 'primevue/config'
+import Dialog from 'primevue/dialog';
 import Carousel from 'primevue/carousel';
 
 // import 'primevue/resources/themes/saga-blue/theme.css'; // Тема (замість saga-blue можна використати іншу тему)
@@ -18,6 +19,7 @@ const app = createApp(App)
 const pinia = createPinia()
 
 app.component('VCarousel', Carousel);
+app.component('VDialog', Dialog);
 
 app.use(router)
 app.use(pinia)
