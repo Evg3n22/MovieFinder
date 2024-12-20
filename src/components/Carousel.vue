@@ -26,6 +26,9 @@
           <div class="mb-4 font-medium">{{ slotProps.data.title }}</div>
           <div class="flex justify-between items-center">
             <div class="mt-0 font-semibold text-xl">{{ slotProps.data.year }}</div>
+            <router-link :to="{ name: 'info', params: { id: slotProps.data.id } }">
+              <img src="@/assets/image/info.svg" alt="info icon">
+            </router-link>
           </div>
         </div>
       </template>
@@ -34,9 +37,9 @@
 </template>
 
 <script setup>
-import {useFilmsStore} from '@/store.js'
+import { useFilmsStore } from '@/store.js'
 import { ref, onMounted } from 'vue'
-import Carousel from 'primevue/carousel';
+import Carousel from 'primevue/carousel'
 
 // import { ProductService } from '@/service/ProductService'
 
