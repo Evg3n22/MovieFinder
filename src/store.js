@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
+import imgNotFound from '@/assets/image/img_not_found.jpg';
 
 export const useFilmsStore = defineStore('films', {
   state: () => ({
     url: 'http://www.omdbapi.com/?apikey=895736cc&',
     films: [],
-    filmName: null,
-    img_not_found: new URL('@/assets/image/img_not_found.jpg', import.meta.url).href,
+    filmName: '',
+    // img_not_found: new URL('@/assets/image/img_not_found.jpg', import.meta.url).href,
   }),
   actions: {
 
@@ -27,7 +28,7 @@ export const useFilmsStore = defineStore('films', {
                 .then((filmDetails) => {
                   // Якщо постера немає, використовуємо стандартний
                   if (filmDetails.Poster === 'N/A') {
-                    filmDetails.Poster = this.img_not_found
+                    filmDetails.Poster = imgNotFound
                   }
                   return {
                     title: filmDetails.Title,
@@ -70,6 +71,12 @@ export const useAdditionalFilmsStore = defineStore('additionalFilms', {
   }),
   actions: {
     addFilm(title, year, poster, director) {
+
+      const defaultPoster = imgNotFound;
+      if(poster === undefined){
+        poster = defaultPoster
+      }
+
       this.film = {
         title: title,
         year: year,
@@ -77,6 +84,7 @@ export const useAdditionalFilmsStore = defineStore('additionalFilms', {
         director: director,
         id: +new Date(),
       }
+
       this.additionalFilms = JSON.parse(localStorage.getItem('additionalFilms')) || []
       this.additionalFilms.push(this.film)
 

@@ -6,11 +6,14 @@ export default {
 </script>
 
 <script setup>
-import { useAdditionalFilmsStore } from '@/store.js'
-const store = useAdditionalFilmsStore()
+import Carousel from '@/components/Carousel.vue'
+import {useAdditionalFilmsStore} from '@/store.js'
+const addstore = useAdditionalFilmsStore()
 
 </script>
 
 <template>
-  <div>{{ store.additionalFilms }}</div>
+
+  <Carousel :movies="addstore.additionalFilms"/>
+
 </template>

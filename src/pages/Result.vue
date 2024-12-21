@@ -6,8 +6,18 @@ export default {
 }
 </script>
 
+<script setup>
+import {useFilmsStore} from '@/store.js'
+import { onMounted} from 'vue'
+
+const store = useFilmsStore()
+onMounted(() => {
+  store.getFilmsFromLocalStorage()
+})
+</script>
+
 <template>
-  <Carousel/>
+  <Carousel :movies="store.films" />
 </template>
 
 <style scoped></style>

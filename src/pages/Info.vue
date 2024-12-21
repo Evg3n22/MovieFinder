@@ -21,11 +21,19 @@ export default {
       film: {},
     }
   },
+  props: {
+    getFilms: function () {}
+  },
   methods: {
     GetFilms(){
       this.films = JSON.parse(localStorage.getItem('films') ?? '[]')
       this.film = this.films.find((item) => item.id.toString() === this.filmId)
-      console.log(this.film)
+
+      if(this.film === undefined){
+        this.films = JSON.parse(localStorage.getItem('additionalFilms') ?? '[]')
+        this.film = this.films.find((item) => item.id.toString() === this.filmId)
+      }
+
     },
   },
   beforeMount() {

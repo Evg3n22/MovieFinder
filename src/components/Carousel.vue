@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <Carousel
-      :value="store.films"
+      :value="movies"
       :numVisible="4"
       :numScroll="3"
       :responsiveOptions="responsiveOptions"
@@ -37,15 +37,10 @@
 </template>
 
 <script setup>
-import { useFilmsStore } from '@/store.js'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import Carousel from 'primevue/carousel'
 
-const store = useFilmsStore()
-
-onMounted(() => {
-  store.getFilmsFromLocalStorage()
-})
+defineProps(['movies'])
 
 const responsiveOptions = ref([
   {
