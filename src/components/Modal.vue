@@ -7,10 +7,28 @@ export default {
 <script setup>
 import { useAdditionalFilmsStore } from '@/store.js'
 import Dialog from 'primevue/dialog'
+import FileUpload from 'primevue/fileupload';
 import { ref } from 'vue'
+
+const src = ref(null);
+
+function onFileSelect(event) {
+  const file = event.files[0];
+  const reader = new FileReader();
+
+  reader.onload = async (e) => {
+    src.value = e.target.result;
+    addStore.additionalFilms.poster = src.value;
+  };
+
+  reader.readAsDataURL(file);
+}
 
 const visible = ref(false)
 const addStore = useAdditionalFilmsStore()
+
+
+
 </script>
 
 <template>
@@ -32,16 +50,24 @@ const addStore = useAdditionalFilmsStore()
             v-model="addStore.additionalFilms.title"
           />
         </div>
-        <div class="form-group">
-          <label for="posterInput">Poster</label>
-          <input
-            type="text"
-            class="form-control"
-            id="posterInput"
-            placeholder="Enter poster link"
-            v-model="addStore.additionalFilms.poster"
-          />
+<!--        <div class="form-group">-->
+<!--          <label for="posterInput">Poster</label>-->
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="form-control"-->
+<!--            id="posterInput"-->
+<!--            placeholder="Enter poster link"-->
+<!--            v-model="addStore.additionalFilms.poster"-->
+<!--          />-->
+<!--        </div>-->
+
+
+        <div class="card flex flex-col items-center gap-6">
+          <FileUpload mode="basic" @select="onFileSelect" customUpload auto severity="secondary" class="p-button-outlined" />
+          <img v-if="src" :src="src" alt="Image" class="shadow-md rounded-xl w-full sm:w-64" style="filter: grayscale(100%)" />
         </div>
+
+
         <div class="form-group">
           <label for="directorInput">Director</label>
           <input
