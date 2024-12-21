@@ -5,19 +5,23 @@ export default {
 </script>
 
 <script setup>
-// import { useFilmsStore } from '@/store.js'
-import Dialog from 'primevue/dialog';
-import { ref } from "vue";
+import { useAdditionalFilmsStore } from '@/store.js'
+import Dialog from 'primevue/dialog'
+import { ref } from 'vue'
 
-const visible = ref(false);
-// const store = useFilmsStore()
+const visible = ref(false)
+const addStore = useAdditionalFilmsStore()
 </script>
 
 <template>
   <div>
     <div class="card flex justify-center">
-      <Button class="btn btn-dark" @click="visible = true">Show</Button>
-      <Dialog v-model:visible="visible" header="Add film" :style="{ width: '25rem' , marginBottom: '10px' }">
+      <button class="btn btn-dark" @click="visible = true">Show</button>
+      <Dialog
+        v-model:visible="visible"
+        header="Add film"
+        :style="{ width: '25rem', marginBottom: '10px' }"
+      >
         <div class="form-group">
           <label for="titleInput">Title</label>
           <input
@@ -25,7 +29,7 @@ const visible = ref(false);
             class="form-control"
             id="titleInput"
             placeholder="Enter title of movie"
-            v-model="title"
+            v-model="addStore.additionalFilms.title"
           />
         </div>
         <div class="form-group">
@@ -35,7 +39,7 @@ const visible = ref(false);
             class="form-control"
             id="posterInput"
             placeholder="Enter poster link"
-            v-model="poster"
+            v-model="addStore.additionalFilms.poster"
           />
         </div>
         <div class="form-group">
@@ -45,7 +49,7 @@ const visible = ref(false);
             class="form-control"
             id="directorInput"
             placeholder="Enter director's name"
-            v-model="director"
+            v-model="addStore.additionalFilms.director"
           />
         </div>
         <div class="form-group">
@@ -55,10 +59,25 @@ const visible = ref(false);
             class="form-control"
             id="yearInput"
             placeholder="Enter year of release"
-            v-model="year"
+            v-model="addStore.additionalFilms.year"
           />
+          <!--            @input="$event.target.value"-->
         </div>
-        <button type="submit" @click="visible = false" class="btn btn-dark">Add Film</button>
+        <button
+          type="submit"
+          @click="
+            ((visible = false),
+            addStore.addFilm(
+              addStore.additionalFilms.title,
+              addStore.additionalFilms.year,
+              addStore.additionalFilms.poster,
+              addStore.additionalFilms.director,
+            ))
+          "
+          class="btn btn-dark"
+        >
+          Add Film
+        </button>
         <div class="flex justify-end gap-2"></div>
       </Dialog>
     </div>
@@ -66,9 +85,7 @@ const visible = ref(false);
 </template>
 
 <style>
-
 .form-group {
   margin-bottom: 10px;
 }
-
 </style>

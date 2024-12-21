@@ -7,9 +7,9 @@ export default {
 <script setup>
 import { useFilmsStore } from '@/store.js'
 import Modal from '@/components/Modal.vue'
+import AdditionalFilms from '@/components/AdditionalFilms.vue'
 const store = useFilmsStore()
 
-store.film_search()
 </script>
 
 <template>
@@ -25,6 +25,9 @@ store.film_search()
     </router-link>
 
     <Modal/>
+
+    <h1>Added Films</h1>
+    <AdditionalFilms/>
   </div>
 
 

@@ -27,7 +27,7 @@
           <div class="flex justify-between items-center">
             <div class="mt-0 font-semibold text-xl">{{ slotProps.data.year }}</div>
             <router-link :to="{ name: 'info', params: { id: slotProps.data.id } }">
-              <img src="@/assets/image/info.svg" alt="info icon">
+              <img src="@/assets/image/info.svg" alt="info icon" />
             </router-link>
           </div>
         </div>
@@ -38,10 +38,14 @@
 
 <script setup>
 import { useFilmsStore } from '@/store.js'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Carousel from 'primevue/carousel'
 
 const store = useFilmsStore()
+
+onMounted(() => {
+  store.getFilmsFromLocalStorage()
+})
 
 const responsiveOptions = ref([
   {
