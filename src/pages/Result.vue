@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Carousel :movies="store.films" />
+  <Carousel :movies="store.films" headline="Here are the movies we found for you" />
 </template>
 
 <style scoped></style>

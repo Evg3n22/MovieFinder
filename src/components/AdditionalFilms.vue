@@ -14,6 +14,6 @@ const addstore = useAdditionalFilmsStore()
 
 <template>
 
-  <Carousel :movies="addstore.additionalFilms"/>
+  <Carousel :movies="addstore.additionalFilms" headline="Added films"/>
 
 </template>
