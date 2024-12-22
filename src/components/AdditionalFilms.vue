@@ -13,7 +13,7 @@ const addstore = useAdditionalFilmsStore()
 </script>
 
 <template>
-
+<!--  Passing data to the carousel component-->
   <Carousel :movies="addstore.additionalFilms" headline="Added films"/>
 
 </template>
