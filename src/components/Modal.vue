@@ -38,7 +38,7 @@ const addStore = useAdditionalFilmsStore()
   <Dialog
     v-model:visible="visible"
     header="Add film"
-    :style="{ width: '25rem', marginBottom: '10px' }"
+    :style="{ width: '25rem', marginBottom: '10px', bgColor: 'white' }"
   >
     <div class="form-group">
       <!--     Input movie title      -->
@@ -141,5 +141,8 @@ const addStore = useAdditionalFilmsStore()
 
 .btn-common:hover {
   background-color: rgba(47, 47, 47, 0.3); /* When hovering, I change the color to gray */
+}
+.p-dialog-content {
+  background-color: white; /* Set background-color to modal dialog window */
 }
 </style>

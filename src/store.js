@@ -1,32 +1,31 @@
 import { defineStore } from 'pinia'
-import imgNotFound from '@/assets/image/img_not_found.jpg';
-
+import imgNotFound from '@/assets/image/img_not_found.jpg'; // Set default img
+//Main store with films we search for
 export const useFilmsStore = defineStore('films', {
   state: () => ({
     url: 'http://www.omdbapi.com/?apikey=895736cc&',
     films: [],
     filmName: '',
-    // img_not_found: new URL('@/assets/image/img_not_found.jpg', import.meta.url).href,
   }),
   actions: {
-
     getFilmsFromLocalStorage () {
       const storedFilms = localStorage.getItem('films')
       if (storedFilms) {
         this.films = JSON.parse(storedFilms)
       }
     },
+    // Main function witch get film from https://www.omdbapi.com/)
     film_search(filmName) {
       fetch(`${this.url}s=${filmName}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.Search) {
-            // Для кожного знайденого фільму робимо запит за деталями
+            // For each movie we find, we make a request for details
             const filmDetailsPromises = data.Search.map((film) =>
               fetch(`${this.url}i=${film.imdbID}`)
                 .then((res) => res.json())
                 .then((filmDetails) => {
-                  // Якщо постера немає, використовуємо стандартний
+                  // If there is no poster, we use a default one
                   if (filmDetails.Poster === 'N/A') {
                     filmDetails.Poster = imgNotFound
                   }
@@ -40,7 +39,7 @@ export const useFilmsStore = defineStore('films', {
                 }),
             )
 
-            // Чекаємо завершення всіх запитів
+            // We are waiting for the completion of all requests
             Promise.all(filmDetailsPromises).then((filmDetails) => {
               this.films = filmDetails // Зберігаємо дані у стан
               // Зберігаємо результати в localStorage
@@ -58,6 +57,7 @@ export const useFilmsStore = defineStore('films', {
   },
 })
 
+//Store witch contain added films and methods
 export const useAdditionalFilmsStore = defineStore('additionalFilms', {
   state: () => ({
     additionalFilms: [],
@@ -84,22 +84,19 @@ export const useAdditionalFilmsStore = defineStore('additionalFilms', {
         director: director,
         id: +new Date(),
       }
-
+      // Get all additional films from local storage
       this.additionalFilms = JSON.parse(localStorage.getItem('additionalFilms')) || []
       this.additionalFilms.push(this.film)
-
+      //Put film into local storage
       localStorage.setItem('additionalFilms', JSON.stringify(this.additionalFilms))
     },
 
+    //The method by which we get movies from local storage
     getAdditionalFilmsFromLocalStorage() {
       const storedAdditionalFilms = localStorage.getItem('additionalFilms')
       if (storedAdditionalFilms) {
         this.additionalFilms = JSON.parse(storedAdditionalFilms)
       }
     },
-
-
-
-
   },
 })
